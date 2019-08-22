@@ -191,7 +191,6 @@ const $level = $('.myForm #level');
 const $note = $('.myForm #note');
 
 
-
 $('.table .mBtn').on('click', function (event) {
     event.preventDefault();
     const $link = $(this).attr('href');
@@ -204,27 +203,24 @@ $('.table .mBtn').on('click', function (event) {
         $major.val(res['Minimum'].major);
         $level.val(res['Minimum'].level);
         $note.val(res['Minimum'].note);
-
     });
     $('.myForm #minModal').modal();
 });
 // {"Minimum":{"idMin":1,"major":"edukacja artystyczna w zakresie sztuk plastycznych","level":"I st.","note":null,"depertmentId":1,"departmentByDepertmentId":{"idDepartment":1,"name":"Wydział Artystyczny","akronim":"wart"}}}
 
 
-
-
-(function($) {
+(function ($) {
     "use strict"; // Start of use strict
 
     // Toggle the side navigation
-    $("#sidebarToggle").on('click',function(e) {
+    $("#sidebarToggle").on('click', function (e) {
         e.preventDefault();
         $("body").toggleClass("sidebar-toggled");
         $(".sidebar").toggleClass("toggled");
     });
 
     // Prevent the content wrapper from scrolling when the fixed side navigation hovered over
-    $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function(e) {
+    $('body.fixed-nav .sidebar').on('mousewheel DOMMouseScroll wheel', function (e) {
         if ($(window).width() > 768) {
             var e0 = e.originalEvent,
                 delta = e0.wheelDelta || -e0.detail;
@@ -234,7 +230,7 @@ $('.table .mBtn').on('click', function (event) {
     });
 
     // Scroll to top button appear
-    $(document).on('scroll',function() {
+    $(document).on('scroll', function () {
         var scrollDistance = $(this).scrollTop();
         if (scrollDistance > 100) {
             $('.scroll-to-top').fadeIn();
@@ -244,7 +240,7 @@ $('.table .mBtn').on('click', function (event) {
     });
 
     // Smooth scrolling using jQuery easing
-    $(document).on('click', 'a.scroll-to-top', function(event) {
+    $(document).on('click', 'a.scroll-to-top', function (event) {
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: ($($anchor.attr('href')).offset().top)
