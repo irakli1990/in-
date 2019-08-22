@@ -7,9 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MinimumRepository extends JpaRepository<Minimum,Integer> {
 
-    Minimum findAllByIdDepartment(int id);
+    Minimum findAllByDepartmentByDepertmentId(int id);
+    Minimum findAllByIdMin(int id);
 
-    void deleteMinimumById(int id);
+    void deleteMinimumByIdMin(int id);
 
     Minimum save(Department department);
 

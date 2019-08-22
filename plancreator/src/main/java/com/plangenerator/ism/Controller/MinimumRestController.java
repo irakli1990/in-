@@ -38,7 +38,7 @@ public class MinimumRestController {
     @ResponseBody
     public Minimum findById(@RequestParam(value = "id") int id) {
         logger.debug("**Mimimum findById*", id);
-        return minimumRepository.findAllByIdDepartment(id);
+        return minimumRepository.findAllByIdMin(id);
     }
 
     /**

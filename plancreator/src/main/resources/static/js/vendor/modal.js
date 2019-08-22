@@ -184,6 +184,35 @@ $userform.on("submit", function (e) {
 
 });
 
+
+const $idMin = $('.myForm #idMin');
+const $major = $('.myForm #major');
+const $level = $('.myForm #level');
+const $note = $('.myForm #note');
+
+
+
+$('.table .mBtn').on('click', function (event) {
+    event.preventDefault();
+    const $link = $(this).attr('href');
+    $.get($link, function (res) {
+        console.log("response:" + res['Minimum'].major);
+        console.log("response:" + res['Minimum'].idMin);
+        console.log("response:" + res['Minimum'].major);
+        console.log("response:" + res['Minimum'].note);
+        $idMin.val(res['Minimum'].idMin);
+        $major.val(res['Minimum'].major);
+        $level.val(res['Minimum'].level);
+        $note.val(res['Minimum'].note);
+
+    });
+    $('.myForm #minModal').modal();
+});
+// {"Minimum":{"idMin":1,"major":"edukacja artystyczna w zakresie sztuk plastycznych","level":"I st.","note":null,"depertmentId":1,"departmentByDepertmentId":{"idDepartment":1,"name":"Wydział Artystyczny","akronim":"wart"}}}
+
+
+
+
 (function($) {
     "use strict"; // Start of use strict
 
@@ -219,7 +248,7 @@ $userform.on("submit", function (e) {
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: ($($anchor.attr('href')).offset().top)
-        }, 1000, 'easeInOutExpo');
+        }, 1000);
         event.preventDefault();
     });
 
