@@ -1,0 +1,31 @@
+<div th:fragment="sidebar" class="sidebar">
+    <ul class="sidebar navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="/welcome">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span class="navbar-brand m">Admin Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/welcome"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Użytkownicy</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/department"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Wydziały</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/minimum"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Program Minimum</span>
+            </a>
+        </li>
+    </ul>
+</div>

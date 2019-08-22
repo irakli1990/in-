@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Dashboard</title>
+    <div th:replace="sheared/header:: header"></div>
+    <script type="text/javascript">
+    </script>
+</head>
+<body id="page-top">
+<div th:replace="admin/adminFragments/adminNav:: topNav"></div>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div th:replace="admin/adminFragments/adminSidebar:: sidebar"></div>
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <!-- Icon Cards-->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card text-white bg-success o-hidden h-100">
+                        <div class="card-body">
+                            <div class="card-body-icon">
+                                <i class="fas fa-fw fa-user"></i>
+                            </div>
+                            <div class="mr-5" th:object="${usercout}" th:text="${usercout}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- DataTables Example -->
+            <div th:replace="admin/adminFragments/userTable:: userTable"></div>
+        </div>
+        <div th:replace="admin/adminFragments/userModal:: userModal"></div>
+        <div th:replace="admin/adminFragments/adminFooter:: adminFooter"></div>
+    </div>
+    <div th:replace="admin/adminFragments/scrollUp::scrollToUp"></div>
+</div>
+<div th:replace="admin/adminFragments/adminLogoutModal:: adminLogout"></div>
+<div th:replace="sheared/scripts:: script"></div>
+</body>
+</html>

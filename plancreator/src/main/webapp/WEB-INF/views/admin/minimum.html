@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head th:replace="sheared/header:: header"/>
+<body id="page-top">
+<div th:replace="admin/adminFragments/adminNav:: topNav"/>
+<div id="wrapper">
+    <div th:replace="admin/adminFragments/adminSidebar:: sidebar"/>
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <div th:replace="admin/adminFragments/adminDepartmentCard:: adminDepartmentCard"/>
+            <div th:replace="admin/adminFragments/minimumTable:: minimumTable"/>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/adminFragments/adminFooter:: adminFooter"></div>
+<div th:replace="admin/adminFragments/scrollUp::scrollToUp"></div>
+<div th:replace="admin/adminFragments/adminLogoutModal:: adminLogout"></div>
+<div th:replace="sheared/scripts:: script"></div>
+</body>
+</html>

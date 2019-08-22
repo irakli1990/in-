@@ -1,0 +1,39 @@
+<div th:fragment="userTable">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Użytkownicy
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Imie</th>
+                        <th>Nazwisko</th>
+                        <th>Email</th>
+                        <th>Hasło</th>
+                        <th>Akcja</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="oneuser,iterator : ${users}">
+                        <td th:text="${iterator.index+1}"></td>
+                        <td id="tfirstname" th:text="${oneuser.getFirstname()}"></td>
+                        <td id="tlastname" th:text="${oneuser.getLastname()}"></td>
+                        <td id="tusername" th:text="${oneuser.getUsername()}"></td>
+                        <td id="tpassword" th:text="${oneuser.getPassword()}"></td>
+                        <td>
+                            <a th:text="Editój" class="btn btn-primary" id="uBtn"
+                               th:href="@{api/v1/User(userName=${oneuser.getUsername()})}"></a>
+                            <a th:text="Usuń" class="btn btn-danger"
+                               th:href="@{api/v1/User(userName=${oneuser.getUsername()})}"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

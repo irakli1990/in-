@@ -1,0 +1,48 @@
+<div th:fragment="minimumTable">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Lista Minima wyszukaj skutecznie i szybko
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Akronim</th>
+                        <th>Wydział</th>
+                        <th>Kierunek</th>
+                        <th>Stopien</th>
+                        <th>Uwaga</th>
+                        <th>Akcja</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <th>#</th>
+                    <th>Akronim</th>
+                    <th>Wydział</th>
+                    <th>Kierunek</th>
+                    <th>Stopien</th>
+                    <th>Uwaga</th>
+                    <th>Akcja</th>
+                    </tfoot>
+                    <tbody>
+                    <tr th:each="min,iterator : ${minimum}">
+                        <td th:text="${iterator.index+1}"></td>
+                        <td th:text="${min.getDepartmentByDepertmentId().getAkronim().toUpperCase()}"></td>
+                        <td th:text="${min.getDepartmentByDepertmentId().getName()}"></td>
+                        <td th:text="${min.getMajor()}"></td>
+                        <td th:text="${min.getLevel()}"></td>
+                        <td th:text="${min.getNote()}"></td>
+                        <td>
+                            <button class="btn btn-primary" th:text="Editój"></button>
+                            <button class="btn btn-danger" th:text="Usón"></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
