@@ -14,13 +14,13 @@ public class MinimumService {
     private MinimumRepository minimumRepository;
 
 
-
-    public List<Minimum> getMinimumList(){
+    public List<Minimum> getMinimumList() {
         return minimumRepository.findAll();
     }
-   public int countPlan(){
-       return getMinimumList().size();
-   }
+
+    public int countPlan() {
+        return getMinimumList().size();
+    }
 
 }
 
