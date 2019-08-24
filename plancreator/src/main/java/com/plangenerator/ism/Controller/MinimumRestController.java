@@ -12,9 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
 /**
  * @author Irakli Kardava
  */
@@ -59,8 +56,6 @@ public class MinimumRestController {
 
     /**
      *
-     * @param idMin
-     * @param minimumDetail
      * @return ResponseEntity ok
      * @throws RecordNotFoundException
      */
@@ -68,20 +63,26 @@ public class MinimumRestController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ResponseEntity<Minimum> updateDepartment(
-            @RequestParam(value = "id") int idMin, @RequestBody Minimum minimumDetail)
+            @RequestParam(value = "id") int id, @RequestBody Minimum minimumDetail)
             throws RecordNotFoundException {
         Minimum minimum =
                 minimumRepository
-                        .findById(idMin)
-                        .orElseThrow(() -> new RecordNotFoundException(idMin));
+                        .findById(id)
+                        .orElseThrow(() -> new RecordNotFoundException(id));
         minimum.setDepertmentId(minimumDetail.getDepertmentId());
         minimum.setMajor(minimumDetail.getMajor());
         minimum.setLevel(minimumDetail.getLevel());
         minimum.setNote(minimumDetail.getNote());
-        final Minimum updatedMinimum = minimumRepository.save(minimum);
-        logger.debug("**Update Department**", linkTo(methodOn(MinimumRestController.class).updateDepartment(idMin, minimumDetail)).withSelfRel());
+        final Minimum updatedMinimum = minimumRepository.save(minimumDetail);
+        logger.debug("**Update Minima**",id);
         return ResponseEntity.ok(updatedMinimum);
     }
+//    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Minimum> updateMinima(@RequestBody Minimum minima) throws URISyntaxException {
+//        logger.debug("REST request to update Minima : {}", minima);
+//        Minimum result = minimumRepository.save(minima);
+//        return ResponseEntity.ok().body(result);
+//    }
 
     /**
      *

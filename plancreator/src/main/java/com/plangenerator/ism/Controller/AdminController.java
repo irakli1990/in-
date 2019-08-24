@@ -83,6 +83,7 @@ public class AdminController {
     @GetMapping(value = "/minimum")
     public ModelAndView showMinimum() {
         ModelAndView modelAndView = new ModelAndView("/admin/minimum");
+        modelAndView.addObject("departments",depatmentService.getDepartmentList());
         modelAndView.addObject("minimum", minimumService.getMinimumList());
         modelAndView.addObject("mincount", minimumService.countPlan() + " liczebnosc prograu minimum");
         modelAndView.addObject("depcout", depatmentService.countDepartment() + " Wydziału");

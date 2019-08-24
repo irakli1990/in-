@@ -16,7 +16,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
 
-
 @Configuration
 @EnableGlobalMethodSecurity(
         prePostEnabled = true,
@@ -31,10 +30,13 @@ public class SeciurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
 
+
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-
-
+        authenticationMgr.inMemoryAuthentication()
+                .withUser("admin").password("password")
+                .roles("USER");
         authenticationMgr.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
                 .usersByUsernameQuery(
                         "select u.username,u.password,true from user u where u.username=?")
@@ -56,10 +58,12 @@ public class SeciurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll().anyRequest().permitAll()
                 .antMatchers("/user/**").hasAnyAuthority("USER")
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET,"/api/v1/User/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST,"/api/v1/User/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/api/v1/department/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.PUT,"/api/v1/department/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/User/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/v1/User/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/v1/department/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/v1/department/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/minimum/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/minimum/**").permitAll()
                 .and().authorizeRequests().antMatchers(HttpMethod.GET, "/api/**").hasRole("USER")
                 .and().authorizeRequests().antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
                 .and().authorizeRequests().antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
@@ -75,7 +79,10 @@ public class SeciurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/");
         http.headers().frameOptions().disable();
-
+        http.csrf().disable()
+                .authorizeRequests().anyRequest().authenticated()
+                .and()
+                .httpBasic();
 
     }
 

@@ -1,5 +1,7 @@
 package com.plangenerator.ism.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -53,7 +55,7 @@ public class Minimum {
     }
 
     @Basic
-    @Column(name = "depertment_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "depertment_id", nullable = false)
     public int getDepertmentId() {
         return depertmentId;
     }
@@ -80,7 +82,8 @@ public class Minimum {
     }
 
     @ManyToOne
-    @JoinColumn(name = "depertment_id", referencedColumnName = "id_department", nullable = false)
+    @JsonIgnore
+    @JoinColumn(name = "depertment_id", referencedColumnName = "id_department", nullable = false,insertable=false, updatable=false)
     public Department getDepartmentByDepertmentId() {
         return departmentByDepertmentId;
     }

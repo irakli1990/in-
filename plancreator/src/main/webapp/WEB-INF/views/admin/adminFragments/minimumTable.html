@@ -36,7 +36,7 @@
                         <td th:text="${min.getLevel()}"></td>
                         <td th:text="${min.getNote()}"></td>
                         <td>
-                            <a class="btn btn-primary mBtn" th:href="@{api/v1/minimum(id=${min.getIdMin()})}" th:text="Editój"></a>
+                            <a class="btn btn-primary mBtn" v-on:click="getDataFromServer" th:href="@{api/v1/minimum(id=${min.idMin})}" th:text="Editój"></a>
                             <a class="btn btn-danger" th:text="Usón"></a>
                         </td>
                     </tr>
