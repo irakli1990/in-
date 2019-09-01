@@ -54,7 +54,7 @@ public class SeciurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/resources/**", "/", "/signup", "/forgot-password", "/js/**", "/css/**")
+                .authorizeRequests().antMatchers("/resources/**", "/**","/login/**", "/signup", "/forgot-password", "/js/**", "/css/**")
                 .permitAll().anyRequest().permitAll()
                 .antMatchers("/user/**").hasAnyAuthority("USER")
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
@@ -85,7 +85,6 @@ public class SeciurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic();
 
     }
-
 
 }
 

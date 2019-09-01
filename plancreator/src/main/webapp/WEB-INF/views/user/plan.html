@@ -33,17 +33,17 @@
         <div class="row">
             <div class="col-lx-12">
                 <div class="lead-form">
-                    <h1 class="text-center">Wyszukaj przedmiot</h1>
+                    <h1 class="text-center">Search subjects</h1>
                     <hr/>
                     <div class="row">
                         <div class="col-12">
-                            <input width="100%" type="text" class="form-control" placeholder="Nazwa Przedmiotu"
-                                   v-model="course">
+                            <input width="100%" type="text" class="form-control" placeholder="Name of subject or code"
+                                   v-model="courses">
                             <table width="100%" class="table-bordered">
                                 <tr>
-                                    <th class="fa-1x">Wydział</th>
-                                    <th>Przedmiot</th>
-                                    <th>Kod usos</th>
+                                    <th class="fa-1x">Department</th>
+                                    <th>Subject</th>
+                                    <th>Code USOS</th>
                                     <th>Ects</th>
                                 </tr>
                                 <tr id="tableRow" v-for="one in resultOfSearching" v-on:click="addrow(one)&&totalEsts()">
@@ -88,11 +88,11 @@
                     <div class="table-responsive" id="newTable">
                         <table class="table table-bordered" id="plantable" width="100%" cellspacing="0">
                             <tr>
-                                <th>Wydział</th>
-                                <th>Przedmiot</th>
-                                <th>Kod usos</th>
+                                <th>Department</th>
+                                <th>Subject</th>
+                                <th>Code usos</th>
                                 <th>Ects</th>
-                                <th>usuń</th>
+                                <th>Delete</th>
                             </tr>
 
                             <tr id="przedmioty" v-for="(item,index)  in przedmioty" :key="index" :row="item">
@@ -101,7 +101,7 @@
                                 <td>{{item.courseId}}</td>
                                 <td>{{item.ectsCreditsSimplified}}</td>
                                 <td>
-                                    <button type="button" v-on:click="deleteRow(one)">usuń</button>
+                                    <button type="button" v-on:click="deleteRow(one)">Delete</button>
                                 </td>
                             </tr>
                         </table>
@@ -125,21 +125,21 @@
         el: '#app',
         data: {
             sum: 0,
-            course: '',
+            courses: '',
             faculty: '',
             resultOfSearching: '',
             przedmioty: [],
         },
         watch: {
-            course: function () {
-                if (this.course) {
+            courses: function () {
+                if (this.courses) {
                     this.lookupCourse();
                 }
             }
         },
         methods: {
             lookupCourse: _.debounce(function () {
-                axios.get('http://localhost:8080/name/' + app.course)
+                axios.get('http://localhost:8080/name/' + app.courses)
                     .then(function (response) {
 
                         app.resultOfSearching = response.data.List;

@@ -21,7 +21,7 @@ public class FacultyServisce {
 //    public String searchForFacultyName(String facultyID) {
 //        Reader reader = costumJsonParser.
 //                parsUrltoJsonObject(String.format(facultySearchUrl,facultyID));
-//        FacultySearcher facultySearcher = gson.fromJson(reader, FacultySearcher.class);
+//        Faculties facultySearcher = gson.fromJson(reader, Faculties.class);
 //        return facultySearcher.getName().getPl();
 //    }
 

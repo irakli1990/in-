@@ -1,6 +1,10 @@
 //***************************************************** Minimum data ******************************************************************
 
 
+function openModal() {
+    $('.myMinimum #minModal').modal();
+}
+
 var app = new Vue({
     el: '#wrapper',
     data: {

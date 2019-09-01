@@ -129,9 +129,9 @@ public class UserController {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
             model.addAttribute("username", userDetail.getUsername());
             model.addAttribute("minimum", minimumService.getMinimumList());
-            model.addAttribute("mincount", minimumService.countPlan() + " liczebnosc prograu minimum");
-            model.addAttribute("depcout", depatmentService.countDepartment() + " Wydziału");
-            model.addAttribute("usercout", userServiceimpl.countUser() + " uzitkowników zarejstrowanich");
+            model.addAttribute("mincount", minimumService.countPlan() + " Programs");
+            model.addAttribute("depcout", depatmentService.countDepartment() + " Departments");
+            model.addAttribute("usercout", userServiceimpl.countUser() + " Users");
         }
 
         return model;

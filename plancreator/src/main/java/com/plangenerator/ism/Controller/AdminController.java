@@ -54,7 +54,7 @@ public class AdminController {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
             model.addAttribute("user", userDetail.getUsername());
             model.addAttribute("list", depatmentService.getDepartmentList());
-            model.addAttribute("departmentCounter", depatmentService.countDepartment() + " Wydziałów");
+            model.addAttribute("departmentCounter", depatmentService.countDepartment() + " Departments");
 
         }
         return "admin/department";
@@ -74,7 +74,7 @@ public class AdminController {
             model.addAttribute("user", userDetail.getUsername());
             model.addAttribute("users", userRepository.findAll());
             model.addAttribute("min", minimumService.getMinimumList());
-            model.addAttribute("usercout", userServiceimpl.countUser() + " uzitkowników zarejstrowanich");
+            model.addAttribute("usercout", userServiceimpl.countUser() + " Users");
         }
         return "admin/welcome";
     }
@@ -85,9 +85,9 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("/admin/minimum");
         modelAndView.addObject("departments",depatmentService.getDepartmentList());
         modelAndView.addObject("minimum", minimumService.getMinimumList());
-        modelAndView.addObject("mincount", minimumService.countPlan() + " liczebnosc prograu minimum");
-        modelAndView.addObject("depcout", depatmentService.countDepartment() + " Wydziału");
-        modelAndView.addObject("usercout", userServiceimpl.countUser() + " uzitkowników zarejstrowanich");
+        modelAndView.addObject("mincount", minimumService.countPlan() + " Programs");
+        modelAndView.addObject("depcout", depatmentService.countDepartment() + " Departments");
+        modelAndView.addObject("usercout", userServiceimpl.countUser() + " Users");
         return modelAndView;
     }
 

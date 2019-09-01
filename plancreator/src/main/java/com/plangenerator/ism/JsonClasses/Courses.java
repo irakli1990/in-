@@ -8,7 +8,7 @@ import java.util.List;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
-public class CourseSearcher {
+public class Courses {
 
     @SerializedName("items")
     private List<Item> mItems;

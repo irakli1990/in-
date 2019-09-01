@@ -74,13 +74,13 @@ $('.table .dBtn').on('click', function (event) {
     })
 
 });
+
 // **************************************************************** Add new Department data **************************************************
 
-$('.card-body #aBtn').on('click', function (event) {
-    event.preventDefault();
+function openDepModal() {
     $('.myForm #exampleAddModal').modal();
-});
 
+}
 
 const postUrl = "http://localhost:8080/api/v1/department";
 const $Addform = $('.myForm #modalAddForm');

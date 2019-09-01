@@ -2,7 +2,10 @@
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i>
-            Lista Minima wyszukaj skutecznie i szybko
+            Programs
+        </div>
+        <div class="card-header">
+            <button class="btn btn-primary" id="minBnt" onclick="openModal()">Add program</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -10,22 +13,22 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Akronim</th>
-                        <th>Wydział</th>
-                        <th>Kierunek</th>
-                        <th>Stopien</th>
-                        <th>Uwaga</th>
-                        <th>Akcja</th>
+                        <th>Acronym</th>
+                        <th>Department</th>
+                        <th>Major</th>
+                        <th>Level</th>
+                        <th>Note</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <th>#</th>
-                    <th>Akronim</th>
-                    <th>Wydział</th>
-                    <th>Kierunek</th>
-                    <th>Stopien</th>
-                    <th>Uwaga</th>
-                    <th>Akcja</th>
+                    <th>Acronym</th>
+                    <th>Department</th>
+                    <th>Major</th>
+                    <th>Level</th>
+                    <th>Note</th>
+                    <th>Action</th>
                     </tfoot>
                     <tbody>
                     <tr th:each="min,iterator : ${minimum}">
@@ -36,8 +39,11 @@
                         <td th:text="${min.getLevel()}"></td>
                         <td th:text="${min.getNote()}"></td>
                         <td>
-                            <a class="btn btn-primary mBtn" v-on:click="getDataFromServer" th:href="@{api/v1/minimum(id=${min.idMin})}" th:text="Editój"></a>
-                            <a class="btn btn-danger" th:text="Usón"></a>
+                            <div class="row">
+                                <a class="btn btn-primary mBtn" v-on:click="getDataFromServer"
+                                   th:href="@{api/v1/minimum(id=${min.idMin})}" th:text="Edit"></a>
+                                <a class="btn btn-danger" th:text="Delete"></a>
+                            </div>
                         </td>
                     </tr>
                     </tbody>

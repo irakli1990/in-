@@ -2,37 +2,40 @@
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i>
-            Data Table Example
+            Department
         </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                        <tr>
-                            <th>#</th>
-                            <th>Akronim</th>
-                            <th>Nazwa</th>
-                            <th>Akcja</th>
-                        </tr>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="department,iterator : ${list}">
-                            <td th:text="${iterator.index+1}"></td>
-                            <td th:text="${department.akronim}"></td>
-                            <td th:text="${department.name}"></td>
-                            <td>
-                                <a th:href="@{api/v1/department(id=${department.idDepartment})}"
-                                   class="btn btn-primary eBtn" th:text="Edytój"></a>
-                                <a th:href="@{api/v1/department(id=${department.idDepartment})}"
-                                   class="btn btn-danger dBtn" th:text="Usuń"></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div class="card-header">
+            <button class="btn btn-primary" onclick="openDepModal()">Add new Department</button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                    <tr>
+                        <th>#</th>
+                        <th>Acronym</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="department,iterator : ${list}">
+                        <td th:text="${iterator.index+1}"></td>
+                        <td th:text="${department.akronim}"></td>
+                        <td th:text="${department.name}"></td>
+                        <td>
+                            <a th:href="@{api/v1/department(id=${department.idDepartment})}"
+                               class="btn btn-primary eBtn" th:text="Edit"></a>
+                            <a th:href="@{api/v1/department(id=${department.idDepartment})}"
+                               class="btn btn-danger dBtn" th:text="Delete"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 </div>

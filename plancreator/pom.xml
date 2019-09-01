@@ -14,10 +14,13 @@
     <name>ismplangenerator</name>
     <description>study plan generator</description>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <thymeleaf.version>LATEST</thymeleaf.version>
+        <thymeleaf-layout-dialect.version>LATEST</thymeleaf-layout-dialect.version>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -119,8 +122,6 @@
             <version>5.1.8.RELEASE</version>
         </dependency>
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>

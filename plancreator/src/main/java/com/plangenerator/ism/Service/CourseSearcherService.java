@@ -2,8 +2,8 @@ package com.plangenerator.ism.Service;
 
 
 import com.google.gson.Gson;
-import com.plangenerator.ism.JsonClasses.CourseCodeSearcher;
-import com.plangenerator.ism.JsonClasses.CourseSearcher;
+import com.plangenerator.ism.JsonClasses.Course;
+import com.plangenerator.ism.JsonClasses.Courses;
 import com.plangenerator.ism.JsonClasses.Item;
 import com.plangenerator.ism.JsonClasses.Name;
 import com.plangenerator.ism.JsonParser.CostumJsonParser;
@@ -38,8 +38,8 @@ public class CourseSearcherService {
 
         Reader reader = costumJsonParser.
                 parsUrltoJsonObject(String.format(searchUrl, URLEncoder.encode(courseName)));
-        CourseSearcher courseSearcher = gson.fromJson(reader, CourseSearcher.class);
-        List<Item> items = courseSearcher.getItems().stream()
+        Courses courses = gson.fromJson(reader, Courses.class);
+        List<Item> items = courses.getItems().stream()
                 .map(temp -> {
                     Name name = new Name();
                     Item newitem = new Item();
@@ -56,11 +56,11 @@ public class CourseSearcherService {
         return items;
     }
 
-    public CourseCodeSearcher searchForCourseByCode(String code) {
+    public Course searchForCourseByCode(String code) {
 
         Reader codeReader = costumJsonParser.parsUrltoJsonObject(String.format(codeSearchUrl, code));
-        CourseCodeSearcher courseCodeSearcher = gson.fromJson(codeReader, CourseCodeSearcher.class);
-//        System.out.println(courseCodeSearcher.getName().getPl());
-        return courseCodeSearcher;
+        Course course = gson.fromJson(codeReader, Course.class);
+//        System.out.println(course.getName().getPl());
+        return course;
     }
 }

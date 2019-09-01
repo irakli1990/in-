@@ -7,7 +7,7 @@ import javax.annotation.Generated;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
-public class FacultySearcher {
+public class Faculties {
 
     @SerializedName("id")
     private String mId;
