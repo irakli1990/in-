@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="pl" xml:lang="pl" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html lang="pl" xml:lang="pl" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Plan generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
+    <title>Plan generator</title>
 
     <style>
         table {
@@ -16,6 +21,7 @@
         }
 
         td, th {
+            cursor: pointer;
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
@@ -29,16 +35,17 @@
 
 <body>
 <div id="app">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lx-12">
+            <div class="col-12">
                 <div class="lead-form">
                     <h1 class="text-center">Search subjects</h1>
                     <hr/>
+                    <input width="100%" type="text" class="form-control" placeholder="Name of subject or code"
+                           v-model="courses">
+                    <hr/>
                     <div class="row">
                         <div class="col-12">
-                            <input width="100%" type="text" class="form-control" placeholder="Name of subject or code"
-                                   v-model="courses">
                             <table width="100%" class="table-bordered">
                                 <tr>
                                     <th class="fa-1x">Department</th>
@@ -46,7 +53,8 @@
                                     <th>Code USOS</th>
                                     <th>Ects</th>
                                 </tr>
-                                <tr id="tableRow" v-for="one in resultOfSearching" v-on:click="addrow(one)&&totalEsts()">
+                                <tr id="tableRow" v-for="one in resultOfSearching"
+                                    v-on:click="addrow(one)">
                                     <td>{{one.facId}}</td>
                                     <td>{{one.name.pl}}</td>
                                     <td>{{one.courseId}}</td>
@@ -58,67 +66,44 @@
                     </div><!-- end of .lead-form -->
                 </div> <!-- end of .col-md-6.col-md-offset-3 -->
             </div> <!-- end of .row -->
-        </div> <!-- end of .container -->
+        </div>
+        <hr/>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive" id="newTable">
+                    <table class="table table-bordered" id="plantable" width="100%">
+                        <tr>
+                            <th>Department</th>
+                            <th>Subject</th>
+                            <th>Code usos</th>
+                            <th>Ects</th>
+                            <th>Delete</th>
+                        </tr>
 
-        <br>
-        <br>
-        <br>
-        <hr>
-        <hr>
-        <br>
-        <table>
-            <tr th:each="element : ${map}">
-                <td th:text="${element.key}">keyvalue</td>
-                <table>
-                    <tr th:each="anews : ${element.value}">
-                        <td th:text="${anews.name}">Some name</td>
-                        <td th:text="${anews.surname}">Some name</td>
-                        <td th:text="${anews.teacher}">Some name</td>
-                        <td th:text="${anews.semester}">Some name</td>
-                        <td th:text="${anews.albumNr}">Some name</td>
-                        <td th:text="${anews.year}">Some name</td>
-                    </tr>
-                </table>
-            </tr>
-        </table>
-
-        <div class="container" id="newPlan">
-            <div class="row">
-                <div class="col-12">
-                    <div class="table-responsive" id="newTable">
-                        <table class="table table-bordered" id="plantable" width="100%" cellspacing="0">
-                            <tr>
-                                <th>Department</th>
-                                <th>Subject</th>
-                                <th>Code usos</th>
-                                <th>Ects</th>
-                                <th>Delete</th>
-                            </tr>
-
-                            <tr id="przedmioty" v-for="(item,index)  in przedmioty" :key="index" :row="item">
-                                <td>{{item.facId}}</td>
-                                <td>{{item.name.pl}}</td>
-                                <td>{{item.courseId}}</td>
-                                <td>{{item.ectsCreditsSimplified}}</td>
-                                <td>
-                                    <button type="button" v-on:click="deleteRow(one)">Delete</button>
-                                </td>
-                            </tr>
-                        </table>
-                    <p>{{totalEsts()}}</p>
-                    </div>
+                        <tr id="przedmioty" v-for="(item,index)  in przedmioty" :key="index" :row="item">
+                            <td>{{item.facId}}</td>
+                            <td>{{item.name.pl}}</td>
+                            <td>{{item.courseId}}</td>
+                            <td>{{item.ectsCreditsSimplified}}</td>
+                            <td>
+                                <button type="button" v-on:click="deleteRow(index)">Delete</button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
+        <button type="button" v-on:click="sendSubject">Export to Excel</button>
     </div>
-
-    <button type="button" onclick="tableToExcel('newPlan', 'Export HTML Table to Excel')">Export to Excel</button>
-</div> <!-- end of #app -->
+</div>
 </body>
 
 <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
 <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
 <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+
 
 <script>
     var app = new Vue({
@@ -153,56 +138,27 @@
             addrow: _.debounce(function (one) {
                 this.przedmioty.push(one);
             }, 500),
-            deleteRow: _.debounce(function (index) {
-                console.log("Remowing ....", index);
-                this.przedmioty.splice(index, 1);
+            deleteRow: _.debounce(function (one) {
+                console.log("Remowing ....", one);
+                this.przedmioty.splice(this.przedmioty.indexOf(one), 1);
             }, 500),
-            totalEsts: _.debounce(function () {
-               this.przedmioty.forEach(value => {
-                   this.sum += parseInt(value.ectsCreditsSimplified.toString);
-               });
-                return this.sum;
-
+            sendSubject: _.debounce(function () {
+                console.log(JSON.stringify(this.przedmioty));
+                axios.post("http://localhost:8080/send", JSON.stringify(this.przedmioty), {
+                    headers: {
+                        'Content-type': 'application/json',
+                    }
+                })
+                    .then(function (response) {
+                        console.log(response);
+                        window.location.href = '/form/?type=xls'
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
             })
-
         }
     })
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    var tableToExcel = (function () {
-        var uri = 'data:application/vnd.ms-excel;base64,';
-        template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain;  charset=UTF-8"/><meta http-equiv="content-language" content="pl"></head><body><table>{table}</table></body></html>'            , base64 = function (s) {
-            return window.btoa(unescape(encodeURIComponent(s)))
-        }
-            , format = function (s, c) {
-            return s.replace(/{(\w+)}/g, function (m, p) {
-                return c[p];
-            })
-        };
-        return function (table, name) {
-            if (!table.nodeType) table = document.getElementById(table);
-            var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
-            var blob = new Blob([format(template, ctx)]);
-            var blobURL = window.URL.createObjectURL(blob);
-
-            if (ifIE()) {
-                csvData = table.innerHTML;
-                if (window.navigator.msSaveBlob) {
-                    var blob = new Blob([format(template, ctx)], {
-                        type: "text/html"
-                    });
-                    navigator.msSaveBlob(blob, '' + name + '.xls');
-                }
-            } else
-                window.location.href = uri + base64(format(template, ctx))
-        }
-    })();
-
-    function ifIE() {
-        var isIE11 = navigator.userAgent.indexOf(".NET CLR") > -1;
-        var isIE11orLess = isIE11 || navigator.appVersion.indexOf("MSIE") != -1;
-        return isIE11orLess;
-    }
-</script>
 </html>

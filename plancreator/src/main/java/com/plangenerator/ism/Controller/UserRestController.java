@@ -1,6 +1,7 @@
 package com.plangenerator.ism.Controller;
 
 
+import com.plangenerator.ism.Model.Header;
 import com.plangenerator.ism.Model.User;
 import com.plangenerator.ism.Repository.UserRepository;
 import com.plangenerator.ism.exceptions.RecordNotFoundException;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Irakli Kardava
- *
  */
 @RestController
 @RequestMapping("/api/v1/User")
@@ -24,6 +24,8 @@ public class UserRestController {
     @Autowired
     private UserRepository userRepository;
 
+
+    Header header = new Header();
     Logger logger = LoggerFactory.getLogger(UserRestController.class);
 
 
@@ -55,5 +57,7 @@ public class UserRestController {
         logger.debug("**Update User**", userRepository.save(user));
         return ResponseEntity.ok(updateUser);
     }
+
+
 
 }

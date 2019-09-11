@@ -2,6 +2,7 @@ package com.plangenerator.ism.Controller;
 
 
 import com.plangenerator.ism.Dto.FormData;
+import com.plangenerator.ism.JsonClasses.Item;
 import com.plangenerator.ism.Model.User;
 import com.plangenerator.ism.Service.DepartmentService;
 import com.plangenerator.ism.Service.MinimumService;
@@ -17,9 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import sun.text.resources.FormatData;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,8 +46,9 @@ public class UserController {
 
     Map<String, String> userInfoMap = new HashMap<String, String>();
 
+    List<Item> plans = new ArrayList<Item>();
+
     /**
-     *
      * @param model
      * @param error
      * @param logout
@@ -58,7 +64,6 @@ public class UserController {
     }
 
     /**
-     *
      * @param model
      * @return sign up view
      */
@@ -69,7 +74,6 @@ public class UserController {
     }
 
     /**
-     *
      * @param user
      * @param model
      * @return view sign up
@@ -97,16 +101,16 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "/plan")
     public String plan(ModelMap model) {
-        model.addAttribute("map",userInfoMap);
+        model.addAttribute("map", userInfoMap);
         return "user/plan";
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String startForm(Model model) {
-        model.addAttribute("userData", new FormatData());
-        return "user/form";
-    }
+//    @PreAuthorize("hasRole('ROLE_USER')")
+//    @RequestMapping(value = "/form", method = RequestMethod.GET)
+//    public String startForm(Model model) {
+//        System.out.println(model.containsAttribute("plans"));
+//        return "user/form";
+//    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/plan", method = RequestMethod.POST)
@@ -137,5 +141,24 @@ public class UserController {
         return model;
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public @ResponseBody
+    ModelAndView addNewWorker(@RequestBody List<Item> jsonString) {
+        plans = jsonString;
+        System.out.println(new ModelAndView("user/form", "plans", plans));
+        return new ModelAndView("user/form", "plans", plans);
 
+    }
+
+    @RequestMapping(value = "/form", method = RequestMethod.GET)
+    public ModelAndView download(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println(plans);
+        String typeReport = req.getParameter("type");
+        if (typeReport != null && typeReport.equals("xls")) {
+            return new ModelAndView(new XlsView(),"plans", plans);
+
+        }
+        return new ModelAndView("user/form", "plans", plans);
+    }
 }

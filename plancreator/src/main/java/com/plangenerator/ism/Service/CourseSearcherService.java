@@ -42,13 +42,13 @@ public class CourseSearcherService {
         List<Item> items = courses.getItems().stream()
                 .map(temp -> {
                     Name name = new Name();
-                    Item newitem = new Item();
+                    Item newItem = new Item();
                     name.setPl(temp.getName().getPl());
-                    newitem.setName(name);
-                    newitem.setFacId(temp.getFacId());
-                    newitem.setCourseId(temp.getCourseId());
-                    newitem.setEctsCreditsSimplified(temp.getEctsCreditsSimplified());
-                    return newitem;
+                    newItem.setName(name);
+                    newItem.setFacId(temp.getFacId());
+                    newItem.setCourseId(temp.getCourseId());
+                    newItem.setEctsCreditsSimplified(temp.getEctsCreditsSimplified());
+                    return newItem;
                 })
                 .collect(Collectors.toList());
 

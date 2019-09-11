@@ -1,10 +1,12 @@
 package com.plangenerator.ism.Config;
 
+import com.plangenerator.ism.Controller.XlsView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -61,6 +63,7 @@ public class WebConfig implements WebMvcConfigurer {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
+        registry.enableContentNegotiation(new XlsView());
     }
 
 
@@ -84,5 +87,11 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("/login.html");
         registry.addViewController("/signup").setViewName("/signup.html");
     }
+
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.defaultContentType(MediaType.APPLICATION_JSON).favorPathExtension(true);
+    }
+
 
 }
