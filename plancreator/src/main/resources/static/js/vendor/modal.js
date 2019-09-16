@@ -1,4 +1,10 @@
 //******************************************************** Frontend Jquery ***********************************************************************
+function openLogoutModal() {
+    console.log("logout");
+    $('.myLogoutModal #logoutModal').modal();
+}
+
+
 (function ($) {
     "use strict"; // Start of use strict
 

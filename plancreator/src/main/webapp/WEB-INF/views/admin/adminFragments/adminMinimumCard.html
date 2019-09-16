@@ -1,0 +1,14 @@
+<div th:fragment="adminMinimumCard">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card text-white bg-primary o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fas fa-fw fa-book-open"></i>
+                    </div>
+                    <div class="mr-5" th:object="${mincount}" th:text="${mincount}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

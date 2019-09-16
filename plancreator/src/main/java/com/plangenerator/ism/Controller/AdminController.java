@@ -83,11 +83,16 @@ public class AdminController {
     @GetMapping(value = "/minimum")
     public ModelAndView showMinimum() {
         ModelAndView modelAndView = new ModelAndView("/admin/minimum");
-        modelAndView.addObject("departments",depatmentService.getDepartmentList());
-        modelAndView.addObject("minimum", minimumService.getMinimumList());
-        modelAndView.addObject("mincount", minimumService.countPlan() + " Programs");
-        modelAndView.addObject("depcout", depatmentService.countDepartment() + " Departments");
-        modelAndView.addObject("usercout", userServiceimpl.countUser() + " Users");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            modelAndView.addObject("user", userDetail.getUsername());
+            modelAndView.addObject("departments", depatmentService.getDepartmentList());
+            modelAndView.addObject("minimum", minimumService.getMinimumList());
+            modelAndView.addObject("mincount", minimumService.countPlan() + " Programs");
+            modelAndView.addObject("depcout", depatmentService.countDepartment() + " Departments");
+            modelAndView.addObject("usercout", userServiceimpl.countUser() + " Users");
+        }
         return modelAndView;
     }
 
